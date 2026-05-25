@@ -1,9 +1,9 @@
 # ============================================================
 # Air Passengers: Time Series Forecasting
-# STAT 4000 Portfolio Project 4 — Python Implementation
+# STAT 4000 Portfolio Project 4  Python Implementation
 # Author: Jrudani21
 # ============================================================
-# Dataset: AirPassengers — available via statsmodels or Kaggle
+# Dataset: AirPassengers  available via statsmodels or Kaggle
 # https://www.kaggle.com/datasets/rakannimer/air-passengers
 # ============================================================
 
@@ -106,7 +106,7 @@ for m, s in zip(months, seasonal_idx):
 # %%
 def stationarity_test(series, label="Series"):
     print(f"\n{'='*50}")
-    print(f"Stationarity tests — {label}")
+    print(f"Stationarity tests  {label}")
     print(f"{'='*50}")
 
     # ADF test (H0: unit root / non-stationary)
@@ -151,8 +151,8 @@ plt.show()
 
 # %%
 fig, axes = plt.subplots(1, 2, figsize=(13, 4))
-plot_acf(log_diff,  lags=40, ax=axes[0], title="ACF  — log + d=1 + D=1",  alpha=0.05)
-plot_pacf(log_diff, lags=40, ax=axes[1], title="PACF — log + d=1 + D=1", alpha=0.05,
+plot_acf(log_diff,  lags=40, ax=axes[0], title="ACF   log + d=1 + D=1",  alpha=0.05)
+plot_pacf(log_diff, lags=40, ax=axes[1], title="PACF  log + d=1 + D=1", alpha=0.05,
           method="ywm")
 plt.tight_layout()
 plt.savefig("figures/py_04_acf_pacf.png", dpi=150)
@@ -290,7 +290,7 @@ plt.savefig("figures/py_07_validation.png", dpi=150)
 plt.show()
 
 # %% [markdown]
-# ## 10. Bonus — Prophet Comparison
+# ## 10. Bonus  Prophet Comparison
 
 # %%
 # pip install prophet
@@ -326,7 +326,7 @@ try:
                     forecast["yhat_lower"], forecast["yhat_upper"],
                     color="green", alpha=0.12)
     ax.axvline(pd.Timestamp("1961-01"), color="grey", linestyle=":", lw=1)
-    ax.set_title("Prophet Forecast — Air Passengers (log-scale fit, back-transformed)")
+    ax.set_title("Prophet Forecast  Air Passengers (log-scale fit, back-transformed)")
     ax.set_xlabel("Date")
     ax.set_ylabel("Passengers (thousands)")
     ax.legend()
