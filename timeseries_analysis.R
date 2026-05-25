@@ -1,9 +1,9 @@
 # ============================================================
 # Air Passengers: Time Series Forecasting
-# STAT 4000 Portfolio Project 4 — R Implementation
+# STAT 4000 Portfolio Project 4  R Implementation
 # Author: Jrudani21
 # ============================================================
-# Dataset: AirPassengers — built into base R (no download needed)
+# Dataset: AirPassengers  built into base R (no download needed)
 # Monthly international airline passengers, Jan 1949 – Dec 1960
 # ============================================================
 
@@ -47,14 +47,14 @@ png("figures/02_seasonal_plot.png", width = 800, height = 500)
 ggseasonplot(AirPassengers,
              year.labels = TRUE,
              year.labels.left = TRUE,
-             main = "Seasonal Plot — Passengers by Month (Each Year)",
+             main = "Seasonal Plot  Passengers by Month (Each Year)",
              ylab = "Passengers (thousands)")
 dev.off()
 
 # Monthly subseries plot
 png("figures/03_subseries_plot.png", width = 800, height = 500)
 ggsubseriesplot(AirPassengers,
-                main = "Subseries Plot — Mean by Month",
+                main = "Subseries Plot  Mean by Month",
                 ylab = "Passengers (thousands)")
 dev.off()
 
@@ -71,7 +71,7 @@ cat("\nSeasonal indices (multiplicative):\n")
 print(round(decomp_mult$seasonal[1:12], 4))
 
 # ── 5. Stationarity Testing ───────────────────────────────────
-cat("\n===== STATIONARITY TESTS — RAW SERIES =====\n")
+cat("\n===== STATIONARITY TESTS  RAW SERIES =====\n")
 adf_raw  <- adf.test(AirPassengers)
 kpss_raw <- kpss.test(AirPassengers)
 cat(sprintf("ADF  test: p = %.4f  (%s)\n",
@@ -90,7 +90,7 @@ d1_log_ap <- diff(log_ap, differences = 1)
 # Seasonal difference (removes seasonality)
 d1_d12_log_ap <- diff(d1_log_ap, lag = 12)
 
-cat("\n===== STATIONARITY TESTS — LOG + DIFFERENCED =====\n")
+cat("\n===== STATIONARITY TESTS  LOG + DIFFERENCED =====\n")
 adf_diff <- adf.test(d1_d12_log_ap)
 cat(sprintf("ADF  test after log + d=1 + D=1: p = %.4f  (%s)\n",
             adf_diff$p.value,
@@ -108,8 +108,8 @@ dev.off()
 # ── 6. ACF & PACF ────────────────────────────────────────────
 png("figures/06_acf_pacf.png", width = 900, height = 500)
 par(mfrow = c(1, 2))
-acf(d1_d12_log_ap,  lag.max = 40, main = "ACF  — log + d=1 + D=1")
-pacf(d1_d12_log_ap, lag.max = 40, main = "PACF — log + d=1 + D=1")
+acf(d1_d12_log_ap,  lag.max = 40, main = "ACF   log + d=1 + D=1")
+pacf(d1_d12_log_ap, lag.max = 40, main = "PACF  log + d=1 + D=1")
 dev.off()
 
 # ── 7. ARIMA Model Selection ──────────────────────────────────
