@@ -117,10 +117,12 @@ Typical result: **ARIMA(2,1,1)(0,1,0)[12]** or **ARIMA(0,1,1)(0,1,1)[12]**
 | Metric | Value |
 |---|---|
 | Selected model | ARIMA(0,1,1)(0,1,1)[12] |
-| AIC | ~-245 (on log scale) |
+| AIC | -483.39 (log scale, full sample n=144) |
 | Ljung-Box p-value (lag 24) | > 0.05 → white noise residuals ✓ |
 | Hold-out MAPE, 24 months (1959-60) | **8.52%** |
 | Hold-out MAPE, 12 months (1960 only) | 2.90% |
+
+AIC is for SARIMAX(0,1,1)(0,1,1)[12] fitted by statsmodels on log(AirPassengers), all 144 months. It was recomputed with statsmodels, not taken from the R/auto.arima run (not re-run). AIC on the raw series (1021.00) is not comparable with the log-scale value. The Ljung-Box row was checked with statsmodels residuals: p at lag 24 is 0.32 (all residuals) and 0.48 (first 13 start-up residuals dropped).
 
 ### SARIMA vs Prophet (Hold-out 1959–1960)
 | Model | MAPE |
