@@ -119,15 +119,18 @@ Typical result: **ARIMA(2,1,1)(0,1,0)[12]** or **ARIMA(0,1,1)(0,1,1)[12]**
 | Selected model | ARIMA(0,1,1)(0,1,1)[12] |
 | AIC | ~-245 (on log scale) |
 | Ljung-Box p-value (lag 24) | > 0.05 → white noise residuals ✓ |
-| Hold-out MAPE (1959–1960) | **~3–5%** |
+| Hold-out MAPE, 24 months (1959-60) | **8.52%** |
+| Hold-out MAPE, 12 months (1960 only) | 2.90% |
 
 ### SARIMA vs Prophet (Hold-out 1959–1960)
 | Model | MAPE |
 |---|---|
-| SARIMA | ~3–5% |
-| Prophet | ~4–6% |
+| SARIMA (0,1,1)(0,1,1)[12] | 8.52% |
+| Prophet | not re-measured |
 
-→ SARIMA performs slightly better on this small, regular dataset. Prophet shines more on irregular real-world series.
+→ MAPE is on the original passenger scale (forecasts back-transformed with exp), model fitted on log(passengers), order (0,1,1)(0,1,1)[12] refitted on the training window only, statsmodels SARIMAX. The earlier ~3% figure is numerically consistent with the 12-month 1960 hold-out (2.90%) but not with the 24-month 1959-60 hold-out. The Prophet comparison has not been re-run, so no Prophet number is claimed.
+
+Reproduce: `python -c "import numpy as np;from statsmodels.datasets import get_rdataset as g;from statsmodels.tsa.statespace.sarimax import SARIMAX as S;y=np.log(g('AirPassengers','datasets').data.iloc[:,-1].astype(float).values);[print(n,np.mean(abs(1-np.exp(S(y[:144-n],order=(0,1,1),seasonal_order=(0,1,1,12)).fit(disp=False).forecast(n)-y[144-n:])))*100) for n in (24,12)]"`
 
 ---
 
