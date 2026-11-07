@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Janak Rudani. All rights reserved.
+# Provenance: Jrudani21/air-passengers-timeseries/timeseries_analysis.py 985378aa45ff8d54
 # ============================================================
 # Air Passengers: Time Series Forecasting
 # STAT 4000 Portfolio Project 4  Python Implementation

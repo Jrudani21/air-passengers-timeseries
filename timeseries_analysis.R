@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Janak Rudani. All rights reserved.
+# Provenance: Jrudani21/air-passengers-timeseries/timeseries_analysis.R e278e480c5c6820c
 # ============================================================
 # Air Passengers: Time Series Forecasting
 # STAT 4000 Portfolio Project 4  R Implementation
