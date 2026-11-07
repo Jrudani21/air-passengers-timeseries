@@ -65,8 +65,7 @@ dev.off()
 decomp_mult <- decompose(AirPassengers, type = "multiplicative")
 
 png("figures/04_decomposition.png", width = 900, height = 700)
-plot(decomp_mult,
-     main = "Multiplicative Decomposition: Trend + Seasonal + Remainder")
+plot(decomp_mult)  # R >= 4.5 sets the title itself; passing main= raises "formal argument main matched by multiple actual arguments"
 dev.off()
 
 cat("\nSeasonal indices (multiplicative):\n")
@@ -196,7 +195,10 @@ val_fc    <- forecast(val_model, h = 24)
 acc <- accuracy(val_fc, test_ts)
 cat("\n===== HOLD-OUT ACCURACY (1959–1960) =====\n")
 print(acc)
-cat(sprintf("Test MAPE: %.2f%%\n", acc[2, "MAPE"]))
+cat(sprintf("Test MAPE on the log scale: %.2f%% (not passengers; shown for reference)\n", acc[2, "MAPE"]))
+# MAPE that means something: back-transform to passengers first
+mape_orig <- mean(abs(exp(test_ts) - exp(val_fc$mean)) / exp(test_ts)) * 100
+cat(sprintf("Test MAPE on the passenger scale: %.2f%%\n", mape_orig))
 
 # ── 11. Winnipeg Weather Bonus ────────────────────────────────
 # Connects directly to your Assignment 5!
@@ -218,6 +220,6 @@ cat(sprintf("Test MAPE: %.2f%%\n", acc[2, "MAPE"]))
 cat("\n===== SUMMARY =====\n")
 cat("Model: SARIMA on log-transformed AirPassengers\n")
 cat(sprintf("AIC  = %.2f\n", arima_model$aic))
-cat(sprintf("Test MAPE = %.2f%%  (hold-out 1959-1960)\n", acc[2,"MAPE"]))
+cat(sprintf("Test MAPE = %.2f%%  (passenger scale, hold-out 1959-1960)\n", mape_orig))
 cat("Ljung-Box p > 0.05 → white noise residuals ✓\n")
 cat("Seasonal peaks: July–August every year ✓\n")
